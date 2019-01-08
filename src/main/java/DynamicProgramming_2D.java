@@ -11,12 +11,8 @@
 public class DynamicProgramming_2D {
 
     public static void main(String[] args) {
-        final int[] volume = {0, 2, 3, 4, 5};// 4个物品的占用
-        final int[] values = {0, 3, 4, 5, 6};// 4个物品的价值
-        final int maxVolume = 9; // 最大体积 可以用其他值尝试 比如8
-
-        int length = volume.length;
-        int width = maxVolume + 1;
+        int length = DpSourceData.volume.length;
+        int width = DpSourceData.maxVolume + 1;
         Integer[][] table = new Integer[length][width];
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
@@ -27,8 +23,8 @@ public class DynamicProgramming_2D {
                 } else { // 从第二行第二列开始
                     Integer pre = table[i - 1][j];
                     int nxt = pre; // 放不下就去之前的
-                    if (j >= volume[i]) {
-                        nxt = table[i - 1][j - volume[i]] + values[i];
+                    if (j >= DpSourceData.volume[i]) {
+                        nxt = table[i - 1][j - DpSourceData.volume[i]] + DpSourceData.values[i];
                     }
                     table[i][j] = max(pre, nxt);
                 }
@@ -46,8 +42,8 @@ public class DynamicProgramming_2D {
         int right = width - 1;
         for (int i = length - 1; i > 0; i--) { // 逐行回退
             if (!table[i][right].equals(table[i - 1][right])) { // 相等就继续回退，否则输出当前元素
-                System.out.println(values[i]);
-                right -= volume[i]; // 回退空间到之前
+                System.out.println(DpSourceData.values[i]);
+                right -= DpSourceData.volume[i]; // 回退空间到之前
             }
         }
     }
