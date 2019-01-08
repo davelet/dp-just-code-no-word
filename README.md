@@ -1,5 +1,5 @@
 # dp-just-code-no-word
-动态规划代码
+动态规划求解01背包问题代码
 
 `DynamicProgramming_2D`使用了二维数组；
 
